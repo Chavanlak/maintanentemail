@@ -30,6 +30,9 @@ class EmailController extends Controller
         foreach ($emailsToSend as $email) {
             Mail::to($recipientEmail)->send(new MultipleGmailSender($email['content'], $email['subject']));
         }
+        // foreach ($emailsToSend as $email) {
+        //     Mail::to($recipientEmail)->queue(new MultipleGmailSender($email['content'], $email['subject']));
+        // }
 
         return "Multiple Gmails sent successfully to " . $recipientEmail . "!";
     }

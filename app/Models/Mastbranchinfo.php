@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Branch extends Model
+class Mastbranchinfo extends Model
 {
-    protected $table = 'branch';
-    protected $primaryKey = 'branchid';
+    protected $table = 'mastbranchinfo';
+    protected $primaryKey = 'MBranchInfo_Code ';
     public $timestamps = false;
-    
+
+    public $connection = 'secondary';
     use HasFactory;
 }

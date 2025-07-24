@@ -53,21 +53,32 @@ class UserController extends Controller
         $staffname = $request->input('staffname');
         $staffpassword = $request->input('staffpassword');
 
-       
-        $user = DB::table('user')
-            ->where('staffname', $staffname)
-            ->where('staffpassword', $staffpassword)
-            ->first();
+        $user = DB::table('staff_rc')->where('staffname', $staffname)->first();
+        // $user = DB::table('user')
+        //     ->where('staffname', $staffname)
+        //     ->where('staffpassword', $staffpassword)
+        //     ->first();
 
-        if ($user) {
+        // if ($user) {
         
-            Session::put('logged_in', true);
-            Session::put('staffname', $user->staffname);
+        //     Session::put('logged_in', true);
+        //     Session::put('staffname', $user->staffname);
 
-            return redirect('/repair')->with('success', 'Login Successful');
-        } else {
-            return redirect('/loginerror')->with('error', 'Login Failed');
+        //     return redirect('/repair')->with('success', 'Login Successful');
+        // } else {
+        //     return redirect('/loginerror')->with('error', 'Login Failed');
+        // }
+        if(!$user){
+            return redirect('/login')->with('error', 'ไม่พบชื่อผู้ใช้นี้');
         }
+        if($user->staffpassword !== $staffpassword){
+            return redirect('/login')->with('error', 'รหัสผ่านไม่ถูกต้อง');
+        }
+
+        Session::put('logged_in', true);
+        Session::put('staffname', $user->staffname);
+
+        return redirect('/branch')->with('success', 'เข้าสู่ระบบสำเร็จ');
     }
 
     public function loginerror()

@@ -7,8 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <div>เข้าสู่ระบบ</div>
-    </div>
+    <h1>error</h1>
 </body>
 </html>

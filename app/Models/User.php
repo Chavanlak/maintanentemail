@@ -16,6 +16,7 @@ class User extends Model
         'staffname',
         'staffpassword',
     ];
+    protected $table = 'staff_rc;';
 
     // protected $hidden = [
     //     'staffpassword',
