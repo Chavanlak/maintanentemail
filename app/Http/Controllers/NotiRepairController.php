@@ -11,4 +11,5 @@ class NotiRepairController extends Controller
         $manegers = NotirepairRepository::getAllNotirepair();
         return view('notirepair',compact('manegers'));
     }
+   
 }

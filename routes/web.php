@@ -40,6 +40,7 @@ Route::get('/logout',[UserController::class,'logout'])->name('logout');
 // Route::post('/branch', [MastbranchinfoController::class, 'storeBranch'])->middleware('customauth')->name('store.branch');
 Route::get('/send-multiple-gmails', [EmailController::class, 'sendMultipleGmails']);
 Route::get('/branch', [MastbranchinfoController::class, 'getselectBranch']);
+Route::post('/branch', [MastbranchinfoController::class, 'saveBranch']);
 Route::get('/Zone',[NotiRepairController::class,'getallManegers']);
 // Route::get('/showbranch',[MastbranchinfoController::class,'showallBranch']);
 // Route::get('/nav', function () {

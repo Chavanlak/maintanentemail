@@ -45,23 +45,7 @@
     </div> --}}
     <div class="card-body">
       <blockquote class="blockquote mb-0">
-        {{-- <p>กรุณาเลือกสาขา</p>
-        <div class="dropdown mb-3">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                เลือกสาขา
-            </button>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                @foreach ($branch as $bb)
-                    <li>
-                        <a class="dropdown-item" href="?branch={{ $bb->MBranchInfo_Code }}">
-                            {{ $bb->Location }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div> --}}
-        {{-- class="p-3 bg-light rounded shadow-sm w-50 mx-auto" middle position --}}
+    
         <form class="p-3 bg-light rounded shadow-sm w-50">
          
             <div class="mb-3">
@@ -84,45 +68,25 @@
                 </button>
             </div>
         </form>
-        
-    {{-- <div class="form-group my-3">
-        <label for="branches" class="required">กรุณาเลือกสาขาที่คุณใช้บริการในครั้งนี้</label>
+   
        
-        <select name="branches" id="branches">
-          
-            @foreach ($branch as $bb)
-                <option value="{{ $bb->MBranchInfo_Code }}">{{ $bb->Location }}</option>
-            @endforeach
-        </select>
-    </div>
-     --}}
-        {{-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> --}}
       </blockquote>
     </div>
-    {{-- <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p>กรุณาเลือกโซน</p>
-          <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                zone
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item active" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
-              </ul>
-      </div>
-         
-        </blockquote>
-      </div> --}}
-      <form class="p-3 bg-light rounded shadow-sm w-50">
-         
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+      <form action="/branchpost" method="POST" class="p-3 bg-light rounded shadow-sm w-50">
+        @csrf
         <div class="mb-3">
             <label for="branch" class="form-label fw-bold">
                 <i class="mdi mdi-office-building-marker-outline"></i> กรุณาเลือก Zone ที่คุณต้องการ
             </label>
+           
+          
             <select name="branch" id="branch" class="form-select">
                 <option value="">-- เลือกzone --</option>
                 @foreach ($branch as $bb)
@@ -131,6 +95,7 @@
                     </option>
                 @endforeach
             </select>
+       
         </div>
     
         <div class="d-grid">
