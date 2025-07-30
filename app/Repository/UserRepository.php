@@ -14,6 +14,7 @@ class UserRepository{
     public static function getStaffPassword($staffname){
         return User::where('staffname', $staffname)->value('staffpassword');
     }
-
+    
+  
 }
 ?>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Session;
 
 use App\Repository\MastbranchRepository;
 use App\Models\Mastbranchinfo;
@@ -36,22 +37,42 @@ class MastbranchinfoController extends Controller
 
     //     return redirect()->back()->with('success', 'Branch saved successfully!');
     // }
-    public function saveBranch(Request $request)
-    {
-        $request->validate([
-            'MBranchInfo_Code' => 'required|string',
-            'Location' => 'required|string',
-        ]);
+    // public function saveBranch(Request $request)
+    // {
+    //     $request->validate([
+    //         'MBranchInfo_Code' => 'required|string',
+    //         'Location' => 'required|string',
+    //     ]);
 
-        $branch = new Mastbranchinfo();
-        $branch->MBranchInfo_Code = $request->input('MBranchInfo_Code');
-        $branch->Location = $request->input('Location');
-        $branch->branch_active = 1; // กำหนดค่าอื่น ๆ ถ้ามี column นี้
-        $branch->save();
-        dd($branch);
-        return redirect()->back()->with('success', 'Branch saved successfully!');
+    //     $branch = new Mastbranchinfo();
+    //     $branch->MBranchInfo_Code = $request->input('MBranchInfo_Code');
+    //     $branch->Location = $request->input('Location');
+    //     $branch->branch_active = 1; 
+    //     $branch->save();
+    
+    //     return redirect()->back()->with('success', 'Branch saved successfully!');
+    // }
+
+    public function saveBranch(Request $request)
+{
+    // ตรวจสอบค่าที่รับมาจาก dropdown ชื่อ "branch"
+    dd($request->branch); // <<< ใส่ตรงนี้เลย
+
+    $request->validate([
+        'branch' => 'required|string',
+    ]);
+
+    $branch = Mastbranchinfo::where('MBranchInfo_Code', $request->branch)->first();
+
+    if (!$branch) {
+        return redirect()->back()->with('error', 'ไม่พบสาขาที่เลือก');
     }
 
+    Session::put('MBranchInfo_Code', $branch->MBranchInfo_Code);
+    Session::put('Location', $branch->Location);
+
+    return redirect()->back()->with('success', 'ยืนยันสาขาแล้ว: ' . $branch->Location);
+}
 
 
     //     public function storeBranch(Request $request)

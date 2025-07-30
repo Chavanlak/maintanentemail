@@ -40,61 +40,83 @@
    
 </nav>
 <div class="card">
-    <div class="card-header">
+    {{-- <div class="card-header">
       เลือกสาขาที่คุณต้องการ
-    </div>
+    </div> --}}
     <div class="card-body">
       <blockquote class="blockquote mb-0">
-        <p>กรุณาเลือกสาขา</p>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-              สาขา
-            </button>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-              <li><a class="dropdown-item active" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Separated link</a></li>
-            </ul>
-    </div>
-    {{-- <div class="form-group my-3">
-        <label for="branches" class="required">กรุณาเลือกสาขาที่คุณใช้บริการในครั้งนี้</label>
-       
-        <select name="branches" id="branches">
-          
-            @foreach ($branch as $bb)
-                <option value="{{ $bb->MBranchInfo_Code }}">{{ $bb->Location }}</option>
-            @endforeach
-        </select>
-    </div> --}}
-        {{-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> --}}
-      </blockquote>
-    </div>
-    <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p>กรุณาเลือกโซน</p>
-          <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                zone
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item active" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
-              </ul>
-      </div>
-          {{-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> --}}
-        </blockquote>
-      </div>
+    
+        <form action="/repair" method="POST" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm w-50">
+            @csrf
+        
+            {{-- เลือกสาขา --}}
+            <div class="mb-3">
+                <label for="branch" class="form-label fw-bold">
+                    <i class="mdi mdi-office-building-marker-outline"></i> กรุณาเลือกสาขา
+                </label>
+                <select name="branch" id="branch" class="form-select" required>
+                    <option value="">-- เลือกสาขา --</option>
+                    @foreach ($branch as $bb)
+                        <option value="{{ $bb->MBranchInfo_Code }}"
+                            @if (session('MBranchInfo_Code') == $bb->MBranchInfo_Code) selected @endif>
+                            {{ $bb->Location }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        
+            {{-- เลือก Zone --}}
+            <div class="mb-3">
+                <label for="zone" class="form-label fw-bold">
+                    <i class="mdi mdi-map-marker-outline"></i> กรุณาเลือก Zone ที่คุณต้องการ
+                </label>
+                <select name="zone" id="zone" class="form-select" required>
+                    <option value="">-- เลือก Zone --</option>
+                    @foreach ($manegers as $mn)
+                        <option value="{{ $mn->Firstname }}">{{ $mn->Firstname }}</option>
+                    @endforeach
+                </select>
+            </div>
+        
+            {{-- เลือกหมวดหมู่ --}}
+            <div class="mb-3">
+                <label for="category" class="form-label fw-bold">
+                    <i class="mdi mdi-wrench-outline"></i> เลือกหมวดหมู่แจ้งซ่อม
+                </label>
+                <select name="category" id="category" class="form-select" required>
+                    <option value="">-- เลือกหมวดหมู่ --</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                </select>
+            </div>
+        
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
+                    <i class="mdi mdi-arrow-right-bold-circle-outline"></i> ไปต่อ
+                </button>
+            </div>
+        </form>
+        
   </div>
 
    
 
 <!-- Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function validateForm() {
+        const branch = document.getElementById('branch').value;
+        const zone = document.getElementById('zone').value;
+        const category = document.getElementById('category').value;
+
+        if (!branch || !zone || !category) {
+            alert('กรุณาเลือกข้อมูลให้ครบทุกช่องก่อนกดไปต่อ');
+            return false;
+        }
+        return true;
+    }
+</script>
 
 </body>
 </html>

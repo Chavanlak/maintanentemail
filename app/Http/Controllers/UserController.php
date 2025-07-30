@@ -77,7 +77,7 @@ class UserController extends Controller
 
         Session::put('logged_in', true);
         Session::put('staffname', $user->staffname);
-
+        // return view('/branch');
         return redirect('/branch')->with('success', 'เข้าสู่ระบบสำเร็จ');
     }
 

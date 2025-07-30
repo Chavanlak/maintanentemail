@@ -45,8 +45,8 @@
     </div> --}}
     <div class="card-body">
       <blockquote class="blockquote mb-0">
-    
-        <form class="p-3 bg-light rounded shadow-sm w-50">
+{{--     
+        <form method="POST" action="/branchpost" class="p-3 bg-light rounded shadow-sm w-50">
          
             <div class="mb-3">
                 <label for="branch" class="form-label fw-bold">
@@ -56,6 +56,34 @@
                     <option value="">-- เลือกสาขา --</option>
                     @foreach ($branch as $bb)
                         <option value="{{ $bb->MBranchInfo_Code }}">
+                            @if (session('MBranchInfo_Code')==$bb->MBranchInfo_Code)
+                                <span class="mdi mdi-check-circle text-success"></span>
+                            
+                            @endif
+                            {{ $bb->Location }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
+                    <i class="mdi mdi-check-circle-outline"></i> ยืนยันสาขา
+                </button>
+            </div>
+        </form> --}}
+        <form action="/branchpost" method="POST" class="p-3 bg-light rounded shadow-sm w-50">
+            @csrf
+            
+            <div class="mb-3">
+                <label for="branch" class="form-label fw-bold">
+                    <i class="mdi mdi-office-building-marker-outline"></i> กรุณาเลือกสาขา
+                </label>
+                <select name="branch" id="branch" class="form-select" required>
+                    <option value="">-- เลือกสาขา --</option>
+                    @foreach ($branch as $bb)
+                        <option value="{{ $bb->MBranchInfo_Code }}"
+                            @if (session('MBranchInfo_Code') == $bb->MBranchInfo_Code) selected @endif>
                             {{ $bb->Location }}
                         </option>
                     @endforeach
@@ -68,18 +96,43 @@
                 </button>
             </div>
         </form>
-   
+        
        
       </blockquote>
     </div>
-        @if (session('success'))
+        {{-- @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        @endif
+        @endif --}}
 
-      <form action="/branchpost" method="POST" class="p-3 bg-light rounded shadow-sm w-50">
+      <form class="p-3 bg-light rounded shadow-sm w-50">
+      
+        <div class="mb-3">
+            <label for="branch" class="form-label fw-bold">
+                <i class="mdi mdi-office-building-marker-outline"></i> กรุณาเลือก Zone ที่คุณต้องการ
+            </label>
+           
+          
+            <select name="branch" id="branch" class="form-select">
+                <option value="">-- เลือกzone --</option>
+                @foreach ($manegers as $mn)
+                    <option value="{{ $mn->Firstname}}">
+                        {{-- {{ $bb->Location }} --}}
+                    </option>
+                @endforeach
+            </select>
+       
+        </div>
+    
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">
+                <i class="mdi mdi-check-circle-outline"></i> ยืนยัน Zone
+            </button>
+        </div>
+    </form>
+    {{-- <form action="/branchpost" method="POST" class="p-3 bg-light rounded shadow-sm w-50">
         @csrf
         <div class="mb-3">
             <label for="branch" class="form-label fw-bold">
@@ -103,7 +156,21 @@
                 <i class="mdi mdi-check-circle-outline"></i> ยืนยัน Zone
             </button>
         </div>
-    </form>
+    </form> --}}
+    <div class="mb-3">
+        <label for="branch" class="form-label fw-bold">
+            <i class="mdi mdi-office-building-marker-outline"></i>เลือกหมวดหมู่เเจ้งซ่อม
+        </label>
+        <select name="branch" id="branch" class="form-select">
+            <option value="">-- เลือกหมวดหมู่--</option>
+            
+            <option value="">A</option>
+            <option value="">B</option>
+            <option value="">C</option>
+
+        </select>
+    </div>
+    <a href="/repair"><button >next</button></a>
   </div>
 
    
