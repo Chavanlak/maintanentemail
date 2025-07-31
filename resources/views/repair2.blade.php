@@ -46,11 +46,11 @@
     <div class="card-body">
       <blockquote class="blockquote mb-0">
 
-        <form action="/repair/repair2" method="GET" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm w-50">
+        <form action="" method="POST" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm w-50">
             @csrf
 
             {{-- เลือกสาขา --}}
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="branch" class="form-label fw-bold">
                     <i class="mdi mdi-office-building-marker-outline"></i> กรุณาเลือกสาขา
                 </label>
@@ -63,10 +63,10 @@
                         </option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
 
             {{-- เลือก Zone --}}
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="zone" class="form-label fw-bold">
                     <i class="mdi mdi-map-marker-outline"></i> กรุณาเลือก Zone ที่คุณต้องการ
                 </label>
@@ -76,7 +76,7 @@
                         <option value="{{ $mn->Firstname }}">{{ $mn->Firstname }}</option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
 
             {{-- เลือกหมวดหมู่ --}}
             <div class="mb-3">
@@ -88,8 +88,8 @@
                     {{-- <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option> --}}
-                     @foreach ($equipmenttype as $eqm)
-                        <option value="{{ $eqm->TypeId }}">{{ $eqm->TypeName}}</option>
+                     @foreach ($equipment as $eqm)
+                        <option value="{{ $eqm->equipmentId}}">{{ $eqm->equipmentName}}</option>
                     @endforeach
                 </select>
             </div>

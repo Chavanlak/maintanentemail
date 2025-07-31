@@ -7,6 +7,9 @@ class EquipmentRepository{
     public static function getallEquipment(){
         return Equipment::all();
     }
-    
+    public static function getequipmentById($TypeId){
+        return Equipment::where('TypeId', $TypeId)->get();
+    }
+
 }
 ?>

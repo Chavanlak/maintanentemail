@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Repository\MastbranchRepository;
 use App\Repository\NotirepairRepository;
+use App\Repository\EquipmentRepository;
+use App\Repository\EquipmentTypeRepository;
 use Illuminate\Http\Request;
 
 class NotiRepairController extends Controller
@@ -16,30 +18,30 @@ class NotiRepairController extends Controller
         $manegers = NotirepairRepository::getAllNames();
         return view('/branch',compact('manegers'));
     }
-   
+
     public static function showallManegers()
     {
         $manegers = NotirepairRepository::getAllNotirepair();
         return view('zone', ['manegers' => $manegers]);
     }
-    
+
 
 
 public function handleForm(Request $request)
 {
     $request->validate([
-        'branch' => 'required|string|exists:mastbranchinfo,MBranchInfo_Code',
+        'branch' => 'required|string',
         'zone' => 'required|string',
-        'category' => 'required|string',
+        'equipment' => 'required|string',
     ]);
 
     // เก็บลง session หรือส่งต่อ
     session([
         'selected_branch' => $request->branch,
         'selected_zone' => $request->zone,
-        'selected_category' => $request->category,
+        'selected_equipment' => $request->category,
     ]);
-  
+
     return redirect('repair/form'); // หรือแสดงหน้าถัดไป
 }
 
@@ -63,6 +65,7 @@ public function handleForm(Request $request)
     public static function ShowRepairForm(){
         $branch = MastbranchRepository::selectbranch();
         $manegers = NotirepairRepository::getAllNotirepair();
-        return view('repair',compact('branch', 'manegers'));
+        $equipmenttype = EquipmentTypeRepository::getallEquipmentType();
+        return view('repair',compact('branch', 'manegers','equipmenttype'));
     }
 }

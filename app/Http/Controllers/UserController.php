@@ -10,8 +10,8 @@
 // {
 //    public static function login(){
 //     return view('login');
-//    } 
-  
+//    }
+
 //    public static function loginPost(){
 //     $credentials = [
 //         'staffname'=>request('staffname'),
@@ -19,7 +19,7 @@
 //     ];
 //     if(Auth::attempt($credentials)){
 //         return redirect('/repair')->with('success','Login Successful');
-    
+
 //    }
 //     else{
 //         return redirect('/loginerror')->with('error','Login Failed');
@@ -45,7 +45,7 @@ class UserController extends Controller
 {
     public function login()
     {
-        return view('login'); 
+        return view('login');
     }
 
     public function loginPost(Request $request)
@@ -60,7 +60,7 @@ class UserController extends Controller
         //     ->first();
 
         // if ($user) {
-        
+
         //     Session::put('logged_in', true);
         //     Session::put('staffname', $user->staffname);
 
@@ -84,7 +84,7 @@ class UserController extends Controller
 
     public function loginerror()
     {
-        return view('loginerror'); 
+        return view('loginerror');
     }
 
     public function logout()
@@ -95,7 +95,7 @@ class UserController extends Controller
 
     public function showrepair()
     {
-        return view('repair'); 
+        return view('repair');
     }
 }
 

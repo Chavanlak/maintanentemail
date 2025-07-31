@@ -52,8 +52,9 @@ Route::get('/layout', function () {
 //  action="{{ route('select.branch') }}" method="POST"
 // routes/web.php
 Route::get('/repair', [NotiRepairController::class,'ShowRepairForm'])->middleware('customauth');
-Route::post('/repair', [NotiRepairController::class, 'handleForm'])->middleware('customauth');
-Route::get('/repair/form', [EquipmentController::class, 'ShowAllEquipment'])->middleware('customauth');
+// Route::post('/repair', [NotiRepairController::class, 'handleForm'])->middleware('customauth');
+// Route::get('/repair/equipment', [EquipmentController::class, 'ShowAllEquipmentType'])->middleware('customauth');
+Route::get('/repair/repair2', [EquipmentController::class, 'ShowAllEquipment'])->middleware('customauth');
 Route::post('/submit-repair', [NotiRepairController::class, 'submitRepair'])->middleware('customauth'); // ถ้าคุณมีฟอร์มส่งแจ้งซ่อม
 
 
