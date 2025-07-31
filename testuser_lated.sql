@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2025 at 12:53 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Jul 31, 2025 at 05:42 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,18 +28,38 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `equipment` (
-  `equipmentKitchen` text NOT NULL,
-  `equipmentIT` text NOT NULL,
-  `equipmentgenaral` text NOT NULL
+  `equipmentId` int(11) NOT NULL,
+  `equipmentName` text NOT NULL,
+  `TypeId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `equipment`
 --
 
-INSERT INTO `equipment` (`equipmentKitchen`, `equipmentIT`, `equipmentgenaral`) VALUES
-('ตะหลิว', 'คอม', 'กรรไกร'),
-('หม้อ', 'เครื่องงปริ้น', 'ฝาท่อ');
+INSERT INTO `equipment` (`equipmentId`, `equipmentName`, `TypeId`) VALUES
+(3, 'คอม', 2),
+(4, 'เครื่องทำน้ำร้อน', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipmenttype`
+--
+
+CREATE TABLE `equipmenttype` (
+  `TypeId` int(11) NOT NULL,
+  `TypeName` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `equipmenttype`
+--
+
+INSERT INTO `equipmenttype` (`TypeId`, `TypeName`) VALUES
+(1, 'อุปกรณ์เครื่องครัว'),
+(2, 'อุปกรณ์ไอที'),
+(3, 'อุปกรณ์ทั่วไป');
 
 -- --------------------------------------------------------
 
@@ -124,6 +144,19 @@ INSERT INTO `zone` (`Firstname`, `Lastname`, `Zone`) VALUES
 --
 
 --
+-- Indexes for table `equipment`
+--
+ALTER TABLE `equipment`
+  ADD PRIMARY KEY (`equipmentId`),
+  ADD KEY `TypeId` (`TypeId`);
+
+--
+-- Indexes for table `equipmenttype`
+--
+ALTER TABLE `equipmenttype`
+  ADD PRIMARY KEY (`TypeId`);
+
+--
 -- Indexes for table `history`
 --
 ALTER TABLE `history`
@@ -140,6 +173,18 @@ ALTER TABLE `notirepair`
 --
 
 --
+-- AUTO_INCREMENT for table `equipment`
+--
+ALTER TABLE `equipment`
+  MODIFY `equipmentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `equipmenttype`
+--
+ALTER TABLE `equipmenttype`
+  MODIFY `TypeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
@@ -150,6 +195,16 @@ ALTER TABLE `history`
 --
 ALTER TABLE `notirepair`
   MODIFY `NotirepairId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `equipment`
+--
+ALTER TABLE `equipment`
+  ADD CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`TypeId`) REFERENCES `equipmenttype` (`TypeId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
