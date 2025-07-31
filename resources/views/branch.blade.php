@@ -117,11 +117,11 @@
           
             <select name="branch" id="branch" class="form-select">
                 <option value="">-- เลือกzone --</option>
-                @foreach ($manegers as $mn)
+                {{-- @foreach ($manegers as $mn)
                     <option value="{{ $mn->Firstname}}">
-                        {{-- {{ $bb->Location }} --}}
+                    
                     </option>
-                @endforeach
+                @endforeach --}}
             </select>
        
         </div>

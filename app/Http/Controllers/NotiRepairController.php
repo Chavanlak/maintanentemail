@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\MastbranchRepository;
 use App\Repository\NotirepairRepository;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class NotiRepairController extends Controller
         $manegers = NotirepairRepository::getAllNotirepair();
         return view('zone', ['manegers' => $manegers]);
     }
-    // app/Http/Controllers/RepairController.php
+    
 
 
 public function handleForm(Request $request)
@@ -38,9 +39,30 @@ public function handleForm(Request $request)
         'selected_zone' => $request->zone,
         'selected_category' => $request->category,
     ]);
-
-    return redirect('/repair/form'); // หรือแสดงหน้าถัดไป
+  
+    return redirect('repair/form'); // หรือแสดงหน้าถัดไป
 }
 
-   
+// public function showForm()
+// {
+//     // ตรวจสอบว่ามี session ครบไหมด้วยก็ได้
+//     if (!session()->has('selected_branch')) {
+//         return redirect('/branch')->with('error', 'กรุณาเลือกสาขาก่อน');
+//     }
+
+//     return view('repairform');
+// }
+// public function showRepairForm()
+// {
+//     // ดึงข้อมูลสาขา และ manegers มาใส่ view
+//     $branch = Mastbranchinfo::where('branch_active', 1)->get();
+//     $manegers = Maneger::all(); // หรือ query ข้อมูลโซน/คนจัดการ ตามที่มีจริง
+
+//     return view('repair', compact('branch', 'manegers'));
+// }
+    public static function ShowRepairForm(){
+        $branch = MastbranchRepository::selectbranch();
+        $manegers = NotirepairRepository::getAllNotirepair();
+        return view('repair',compact('branch', 'manegers'));
+    }
 }

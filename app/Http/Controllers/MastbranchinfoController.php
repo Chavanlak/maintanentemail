@@ -56,7 +56,7 @@ class MastbranchinfoController extends Controller
     public function saveBranch(Request $request)
 {
     // ตรวจสอบค่าที่รับมาจาก dropdown ชื่อ "branch"
-    dd($request->branch); // <<< ใส่ตรงนี้เลย
+    dd($request->branch); 
 
     $request->validate([
         'branch' => 'required|string',

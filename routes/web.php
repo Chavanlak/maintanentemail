@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\MastbranchinfoController;
 use App\Http\Controllers\NotiRepairController;
-
+use App\Http\Controllers\EquipmentController;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Route;
 
@@ -46,9 +46,16 @@ Route::get('/Zone',[NotiRepairController::class,'showallManegers']);
 // Route::get('/nav', function () {
 //     return view('navbar');
 // });
-Route::get('/repair', function () {
-    return view('repair');
+Route::get('/layout', function () {
+    return view('layout.mainlayout');
 });
 //  action="{{ route('select.branch') }}" method="POST"
 // routes/web.php
-// Route::post('/repair', [RepairController::class, 'handleForm']);
+Route::get('/repair', [NotiRepairController::class,'ShowRepairForm'])->middleware('customauth');
+Route::post('/repair', [NotiRepairController::class, 'handleForm'])->middleware('customauth');
+Route::get('/repair/form', [EquipmentController::class, 'ShowAllEquipment'])->middleware('customauth');
+Route::post('/submit-repair', [NotiRepairController::class, 'submitRepair'])->middleware('customauth'); // ถ้าคุณมีฟอร์มส่งแจ้งซ่อม
+
+
+// Route::post('/repair', [NotiRepairController::class, 'handleForm']);
+// Route::get('/repair/form', [NotiRepairController::class, 'showForm']);
