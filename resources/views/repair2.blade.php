@@ -46,7 +46,7 @@
     <div class="card-body">
       <blockquote class="blockquote mb-0">
 
-        <form action="" method="POST" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm w-50">
+        <form action="" method="POST" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm ">
             @csrf
 
             {{-- เลือกสาขา --}}
@@ -92,6 +92,25 @@
                         <option value="{{ $eqm->equipmentId}}">{{ $eqm->equipmentName}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label fw-bold">
+                    <i class="mdi mdi-wrench-outline"></i>รายละเอียดเเจ้งซ่อม
+              
+                </label>
+                <textarea name="" id=""></textarea>
+            </div>
+            <div class="mb-3">
+                {{-- <label for="category" class="form-label fw-bold">
+                    <i class="mdi mdi-wrench-outline"></i>รูปภาพ
+                </label>
+                <input type="file" name="" id=""> --}}
+           <form >
+                {{-- <form action="/upload-multiple" method="POST" enctype="multipart/form-data"> --}}
+                    {{-- @csrf --}}
+                    <input type="file" name="files[]" multiple>
+                    <button type="submit">Upload Files</button>
+                </form>
             </div>
 
             <div class="d-grid">

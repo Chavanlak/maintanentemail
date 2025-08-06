@@ -6,6 +6,9 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\MastbranchinfoController;
 use App\Http\Controllers\NotiRepairController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\FileUploadController;
+
+
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Route;
 
@@ -60,3 +63,16 @@ Route::post('/submit-repair', [NotiRepairController::class, 'submitRepair'])->mi
 
 // Route::post('/repair', [NotiRepairController::class, 'handleForm']);
 // Route::get('/repair/form', [NotiRepairController::class, 'showForm']);
+
+//upload
+// Route::get('/uploadfile',[FileUploadController::class,'getallUploadFile']);
+// Route::post('/uploadfilepost',[FileUploadController::class,'savefile']);
+
+
+// Route::post('/uploadfilepost',[FileUploadController::class,'getFileById']);
+// Route::get('/file', function () {
+//     return view('fileupload');
+Route::get('/uploadfile',[FileUploadController::class,'createFile']);
+// Route::post('/store',[FileUploadController::class,'uploadeFile']);
+Route::post('/store',[FileUploadController::class,'store']);
+// });

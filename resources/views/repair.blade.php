@@ -45,8 +45,8 @@
     </div> --}}
     <div class="card-body">
       <blockquote class="blockquote mb-0">
-
-        <form action="/repair/repair2" method="GET" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm w-50">
+        <form action="/repair/repair2" method="GET" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm ">
+        {{-- <form action="/repair/repair2" method="GET" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm w-50"> --}}
             @csrf
 
             {{-- เลือกสาขา --}}
