@@ -76,19 +76,31 @@ public function handleForm(Request $request)
         $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail);
 
 
+        foreach($req->file('filepic') as $file){
+            $file->getClientOriginalName();
+            $filename = explode('.', $file->getClientOriginalName());
+            $fileName = $filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
+            // $fileName = $req->filepic."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
+            $path = Storage::putFileAs('public/',$file,$fileName);
 
-        $file = $req->file('filepic');
-        $file->getClientOriginalName();
-        $filename = explode('.', $file->getClientOriginalName());
-        $fileName = $filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
-        // $fileName = $req->filepic."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
-        $path = Storage::putFileAs('public/',$file,$fileName);
+            $fileup = new FileUpload();
+            $fileup->filename = $fileName;
+            $fileup->filepath = $path;
+            $fileup->NotirepairId = $noti->NotirepairId;
+            $fileup->save();
+        }
+        // $file = $req->file('filepic');
+        // $file->getClientOriginalName();
+        // $filename = explode('.', $file->getClientOriginalName());
+        // $fileName = $filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
+        // // $fileName = $req->filepic."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
+        // $path = Storage::putFileAs('public/',$file,$fileName);
 
-        $fileup = new FileUpload();
-        $fileup->filename = $fileName;
-        $fileup->filepath = $path;
-        $fileup->NotirepairId = $noti->NotirepairId;
-        $fileup->save();
+        // $fileup = new FileUpload();
+        // $fileup->filename = $fileName;
+        // $fileup->filepath = $path;
+        // $fileup->NotirepairId = $noti->NotirepairId;
+        // $fileup->save();
 
         return redirect('/repair');
         // dd($filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension());

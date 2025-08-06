@@ -72,8 +72,7 @@
                 <textarea name="detail" id=""></textarea>
             </div>
             <div class="mb-3">
-                    <input type="file" name="filepic" >
-
+                <input type="file" name="filepic[]" multiple>
             </div>
 
             <div class="d-grid">
