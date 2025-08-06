@@ -46,71 +46,34 @@
     <div class="card-body">
       <blockquote class="blockquote mb-0">
 
-        <form action="" method="POST" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm ">
+        <form action="/repair/submit" method="POST" onsubmit="return validateForm();" class="p-3 bg-light rounded shadow-sm " enctype="multipart/form-data">
             @csrf
 
-            {{-- เลือกสาขา --}}
-            {{-- <div class="mb-3">
-                <label for="branch" class="form-label fw-bold">
-                    <i class="mdi mdi-office-building-marker-outline"></i> กรุณาเลือกสาขา
-                </label>
-                <select name="branch" id="branch" class="form-select" required>
-                    <option value="">-- เลือกสาขา --</option>
-                    @foreach ($branch as $bb)
-                        <option value="{{ $bb->MBranchInfo_Code }}"
-                            @if (session('MBranchInfo_Code') == $bb->MBranchInfo_Code) selected @endif>
-                            {{ $bb->Location }}
-                        </option>
-                    @endforeach
-                </select>
-            </div> --}}
 
-            {{-- เลือก Zone --}}
-            {{-- <div class="mb-3">
-                <label for="zone" class="form-label fw-bold">
-                    <i class="mdi mdi-map-marker-outline"></i> กรุณาเลือก Zone ที่คุณต้องการ
-                </label>
-                <select name="zone" id="zone" class="form-select" required>
-                    <option value="">-- เลือก Zone --</option>
-                    @foreach ($manegers as $mn)
-                        <option value="{{ $mn->Firstname }}">{{ $mn->Firstname }}</option>
-                    @endforeach
-                </select>
-            </div> --}}
-
-            {{-- เลือกหมวดหมู่ --}}
             <div class="mb-3">
                 <label for="category" class="form-label fw-bold">
-                    <i class="mdi mdi-wrench-outline"></i> เลือกหมวดหมู่แจ้งซ่อม
+                    <i class="mdi mdi-wrench-outline"></i> เลือกอุปกรณ์ที่ต้องการเเจ้งซ่อม
                 </label>
                 <select name="category" id="category" class="form-select" required>
-                    <option value="">-- เลือกหมวดหมู่ --</option>
+                    <option value="">-- เลือกอุปกรณ์ที่ต้องการเเจ้งซ่อม --</option>
                     {{-- <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option> --}}
                      @foreach ($equipment as $eqm)
-                        <option value="{{ $eqm->equipmentId}}">{{ $eqm->equipmentName}}</option>
+                        <option value="{{ $eqm->equipmentId}}">{{$eqm->equipmentName}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mb-3">
                 <label for="category" class="form-label fw-bold">
                     <i class="mdi mdi-wrench-outline"></i>รายละเอียดเเจ้งซ่อม
-              
+
                 </label>
-                <textarea name="" id=""></textarea>
+                <textarea name="detail" id=""></textarea>
             </div>
             <div class="mb-3">
-                {{-- <label for="category" class="form-label fw-bold">
-                    <i class="mdi mdi-wrench-outline"></i>รูปภาพ
-                </label>
-                <input type="file" name="" id=""> --}}
-           <form >
-                {{-- <form action="/upload-multiple" method="POST" enctype="multipart/form-data"> --}}
-                    {{-- @csrf --}}
-                    <input type="file" name="files[]" multiple>
-                    <button type="submit">Upload Files</button>
-                </form>
+                    <input type="file" name="filepic" >
+
             </div>
 
             <div class="d-grid">

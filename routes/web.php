@@ -58,7 +58,8 @@ Route::get('/repair', [NotiRepairController::class,'ShowRepairForm'])->middlewar
 // Route::post('/repair', [NotiRepairController::class, 'handleForm'])->middleware('customauth');
 // Route::get('/repair/equipment', [EquipmentController::class, 'ShowAllEquipmentType'])->middleware('customauth');
 Route::get('/repair/repair2', [EquipmentController::class, 'ShowAllEquipment'])->middleware('customauth');
-Route::post('/submit-repair', [NotiRepairController::class, 'submitRepair'])->middleware('customauth'); // ถ้าคุณมีฟอร์มส่งแจ้งซ่อม
+Route::post('/repair/submit', [NotiRepairController::class, 'saveNotiRepair'])->middleware('customauth');
+// Route::post('/submit-repair', [NotiRepairController::class, 'submitRepair'])->middleware('customauth'); // ถ้าคุณมีฟอร์มส่งแจ้งซ่อม
 
 
 // Route::post('/repair', [NotiRepairController::class, 'handleForm']);

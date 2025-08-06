@@ -10,9 +10,16 @@ class NotirepairRepository{
     public static function getAllNames(){
         return Zone::where('FirstName','LastName')->first();
     }
-    public static function save($branch){
-        $notirepair = new Notirepair();
-        $notirepair->branch = $branch;
+    // public static function save($branch){
+    //     $notirepair = new Notirepair();
+    //     $notirepair->branch = $branch;
+    // }
+    public static function saveNotiRepair($equipmentId,$DeatailNotirepair){
+        $noti = new Notirepair();
+        $noti->equipmentId = $equipmentId;
+        $noti->DeatailNotirepair = $DeatailNotirepair;
+        $noti->save();
+        return $noti;
     }
 }
 ?>

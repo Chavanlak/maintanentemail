@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notirepair extends Model
+class FileUpload extends Model
 {
-    protected $table = 'notirepair';
-    protected $primaryKey = 'NotirepairId';
-    public $connection = 'third';
+    protected $table = 'fileupload';
+    protected $primaryKey = 'FileUploadId ';
+
     public $timestamps = false;
+    public $connection = 'third';
+
     use HasFactory;
 }

@@ -6,7 +6,11 @@ use App\Repository\MastbranchRepository;
 use App\Repository\NotirepairRepository;
 use App\Repository\EquipmentRepository;
 use App\Repository\EquipmentTypeRepository;
+use App\Models\Notirepair;
+use App\Models\FileUpload;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreFileRequest;
+use Illuminate\Support\Facades\Storage;
 
 class NotiRepairController extends Controller
 {
@@ -67,5 +71,27 @@ public function handleForm(Request $request)
         $manegers = NotirepairRepository::getAllNotirepair();
         $equipmenttype = EquipmentTypeRepository::getallEquipmentType();
         return view('repair',compact('branch', 'manegers','equipmenttype'));
+    }
+    public static function saveNotiRepair(Request $req){
+        $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail);
+
+
+
+        $file = $req->file('filepic');
+        $file->getClientOriginalName();
+        $filename = explode('.', $file->getClientOriginalName());
+        $fileName = $filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
+        // $fileName = $req->filepic."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
+        $path = Storage::putFileAs('public/',$file,$fileName);
+
+        $fileup = new FileUpload();
+        $fileup->filename = $fileName;
+        $fileup->filepath = $path;
+        $fileup->NotirepairId = $noti->NotirepairId;
+        $fileup->save();
+
+        return redirect('/repair');
+        // dd($filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension());
+
     }
 }

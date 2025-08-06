@@ -89,7 +89,7 @@
                     <option value="B">B</option>
                     <option value="C">C</option> --}}
                      @foreach ($equipmenttype as $eqm)
-                        <option value="{{ $eqm->TypeId }}">{{ $eqm->TypeName}}</option>
+                        <option value="{{ $eqm->TypeId}}">{{ $eqm->TypeName}}</option>
                     @endforeach
                 </select>
             </div>
