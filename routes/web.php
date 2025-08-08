@@ -7,9 +7,10 @@ use App\Http\Controllers\MastbranchinfoController;
 use App\Http\Controllers\NotiRepairController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\FileUploadController;
-
-
+use App\Mail\EmailCenter;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,3 +78,12 @@ Route::get('/uploadfile',[FileUploadController::class,'createFile']);
 // Route::post('/store',[FileUploadController::class,'uploadeFile']);
 Route::post('/store',[FileUploadController::class,'store']);
 // });
+// Route::get('/mail', function () {
+//     return view('email');
+// });
+// Mail::to('repaircentertgi@gmail.com')->send((new EmailCenter($name)));
+Route::get('/email', function () {
+    $name = 'Email Center';
+    Mail::to('repaircentertgi@gmail.com')->send(new EmailCenter($name));
+    // return "ส่งอีเมลแล้ว";
+});

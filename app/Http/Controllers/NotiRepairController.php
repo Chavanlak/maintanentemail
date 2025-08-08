@@ -10,7 +10,10 @@ use App\Models\Notirepair;
 use App\Models\FileUpload;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreFileRequest;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\EmailCenter;
+use Illuminate\Notifications\Notification;
 
 class NotiRepairController extends Controller
 {
@@ -102,8 +105,36 @@ public function handleForm(Request $request)
         // $fileup->NotirepairId = $noti->NotirepairId;
         // $fileup->save();
 
-        return redirect('/repair');
+        // return redirect('/repair');
+        return redirect('/email');
+
         // dd($filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension());
 
+    }
+    public static function SaveNotisendtoemail(Request $req){
+        $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail);
+        $attachments = []; // เก็บ path ของไฟล์ที่จะส่งทางเมล
+        foreach ($req->file('filepic') as $file) {
+            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $fileName = $filename . "_upload_" . date("Y-m-d") . "." . $file->getClientOriginalExtension();
+            $path = Storage::putFileAs('public/', $file, $fileName);
+    
+            // บันทึกลง DB
+            $fileup = new FileUpload();
+            $fileup->filename = $fileName;
+            $fileup->filepath = $path;
+            $fileup->NotirepairId = $noti->NotirepairId;
+            $fileup->save();
+    
+            // เก็บ path สำหรับแนบเมล
+            $attachments[] = storage_path('app/' . $path);
+
+            // Mail::to('repaircentertgi@gmail.com')->send(new EmailCenter($attachments));
+            // Mail::to('someone@example.com')->send(new EmailCenter($noti, $attachments));
+            // return redirect('/email');
+            Mail::send(new EmailCenter('Pol', $attachments));
+            return redirect('/email');
+        }
+        
     }
 }
