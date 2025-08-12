@@ -19,5 +19,15 @@ class FileUploadRepository{
 //     $FileUploadId->Location = $Location;
 //     // $FileUploadId->save();
 //    }
+
+public static function getPicturebyNotiRepairId($NotirepairId){
+    // $noti = Notirepair::find($NotirepairId);
+    // if ($noti && $noti->picture) {
+    //     return Storage::get($noti->picture);
+    // }
+    // return null;
 }
-?> 
+}
+
+
+?>

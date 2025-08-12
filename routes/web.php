@@ -8,6 +8,8 @@ use App\Http\Controllers\NotiRepairController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\FileUploadController;
 use App\Mail\EmailCenter;
+use App\Mail\TestMail;
+
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 
@@ -82,8 +84,27 @@ Route::post('/store',[FileUploadController::class,'store']);
 //     return view('email');
 // });
 // Mail::to('repaircentertgi@gmail.com')->send((new EmailCenter($name)));
+
+// Route::get('/email', function () {
+//     $name = 'Email Center';
+//     Mail::to('repaircentertgi@gmail.com')->send(new EmailCenter($name));
+//     // return "ส่งอีเมลแล้ว";
+// });
+
+// Route::get('/email', function () {
+//     $name = 'Email Center';
+//     $attachments = [
+//         // 'path/to/attachment1.pdf',
+//         // 'path/to/attachment2.jpg',
+//     ];
+//     Mail::to('
+
 Route::get('/email', function () {
-    $name = 'Email Center';
-    Mail::to('repaircentertgi@gmail.com')->send(new EmailCenter($name));
-    // return "ส่งอีเมลแล้ว";
+    $name = 'Test Mail';
+    Mail::to('tgirepaircenter@gmail.com')->send(new TestMail($name));
+
 });
+Route::get('/testmail', [EmailController::class, 'sendEmailTother']);
+Route::get('/emailpic', [EmailController::class, 'saveNotiRepair']);
+
+Route::get('/sendmail', [EmailController::class, 'index']);

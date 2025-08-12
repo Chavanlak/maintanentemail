@@ -13,6 +13,8 @@ use App\Http\Requests\StoreFileRequest;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\EmailCenter;
+use App\Mail\NotiMail;
+
 use Illuminate\Notifications\Notification;
 
 class NotiRepairController extends Controller
@@ -77,21 +79,28 @@ public function handleForm(Request $request)
     }
     public static function saveNotiRepair(Request $req){
         $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail);
+        $uploadedFiles = []; // เก็บ path ของไฟล์ที่จะส่งทางเมล
 
+       $mimeType = [];
+        foreach ($req->file('filepic') as $file) {
+    $file->getClientOriginalName();
+    $filename = explode('.', $file->getClientOriginalName());
+    $fileName = $filename[0]."upload".date("Y-m-d").".".$file->getClientOriginalExtension();
+    $path = Storage::putFileAs('public/', $file, $fileName);
 
-        foreach($req->file('filepic') as $file){
-            $file->getClientOriginalName();
-            $filename = explode('.', $file->getClientOriginalName());
-            $fileName = $filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
-            // $fileName = $req->filepic."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
-            $path = Storage::putFileAs('public/',$file,$fileName);
+    $fileup = new FileUpload();
+    $fileup->filename = $fileName;
+    $fileup->filepath = $path;
+    $fileup->NotirepairId = $noti->NotirepairId;
+    $fileup->save();
+    $realPath = Storage::path($path);
+    $imageData = Storage::get($path);
 
-            $fileup = new FileUpload();
-            $fileup->filename = $fileName;
-            $fileup->filepath = $path;
-            $fileup->NotirepairId = $noti->NotirepairId;
-            $fileup->save();
-        }
+    $uploadedFiles[] = [
+        'data' => base64_encode($imageData),
+        'mime' => str_replace('image/', '', mime_content_type($realPath))
+    ];
+}
         // $file = $req->file('filepic');
         // $file->getClientOriginalName();
         // $filename = explode('.', $file->getClientOriginalName());
@@ -104,9 +113,27 @@ public function handleForm(Request $request)
         // $fileup->filepath = $path;
         // $fileup->NotirepairId = $noti->NotirepairId;
         // $fileup->save();
+    //     Mail::raw("รายละเอียดการแจ้งซ่อม: ".$req->detail, function($message) use ($uploadedFiles) {
+    //     $message->to('smartmeow11@gmail.com')
+    //             ->subject('แจ้งซ่อมใหม่เข้ามา');
 
-        // return redirect('/repair');
-        return redirect('/email');
+    //     foreach ($uploadedFiles as $filePath) {
+    //         $message->attach($filePath);
+    //     }
+    // });
+    // dd($uploadedFiles);
+       $data = [
+        'title'=>'Noti with pic email',
+        'img' => $uploadedFiles,
+        'mime'=>$mimeType
+        ];
+        // เพิ่มบรรทัดนี้เพื่อตรวจสอบข้อมูลก่อนส่งอีเมล
+// dd($data['img']);
+         Mail::to("tgirepaircenter@gmail.com")->send(new NotiMail($data));
+         dd("Email sent successfully!");
+//  dd($data);
+    //     return redirect('/repair');
+        // return redirect('/email');
 
         // dd($filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension());
 
@@ -118,14 +145,14 @@ public function handleForm(Request $request)
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $fileName = $filename . "_upload_" . date("Y-m-d") . "." . $file->getClientOriginalExtension();
             $path = Storage::putFileAs('public/', $file, $fileName);
-    
+
             // บันทึกลง DB
             $fileup = new FileUpload();
             $fileup->filename = $fileName;
             $fileup->filepath = $path;
             $fileup->NotirepairId = $noti->NotirepairId;
             $fileup->save();
-    
+
             // เก็บ path สำหรับแนบเมล
             $attachments[] = storage_path('app/' . $path);
 
@@ -135,6 +162,6 @@ public function handleForm(Request $request)
             Mail::send(new EmailCenter('Pol', $attachments));
             return redirect('/email');
         }
-        
+
     }
 }

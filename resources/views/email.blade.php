@@ -46,7 +46,7 @@
         <input type="file" name="attachments[]" multiple class="form-control mb-3">
         <button type="submit" class="btn btn-primary">ส่งแจ้งซ่อม</button>
     </form>
-    
+
 </body>
 </html> --}}
 {{-- <!DOCTYPE html>
@@ -99,7 +99,7 @@
 
 @section('content')
 <div class="card">
-  
+
     <div class="card-body">
         <blockquote class="blockquote mb-0">
 
@@ -111,7 +111,7 @@
                     <label for="">อีเมลผู้แจ้ง</label>
                     <input type="text" name="from" placeholder="อีเมลผู้แจ้ง (หลายคนคั่นด้วย ,)" class="form-control mb-2" required>
                 </div>
-              
+
                 <div class="mb-3">
                     <label for="">อีเมลผู้รับ</label>
                     <input type="text" name="from" placeholder="อีเมลผู้รับ (หลายคนคั่นด้วย ,)" class="form-control mb-2" required>
@@ -122,7 +122,7 @@
                     </label>
                     <select name="branch" id="branch" class="form-select" required>
                         <option value="">-- เลือกอีเมล --</option>
-                      
+
                     </select>
                 </div>
                 <div class="d-grid">
@@ -135,9 +135,16 @@
     </div>
 </div>
 @endsection --}}
+
+{{--
 <p>From: {{ config('mail.from.address') }} ({{ config('mail.from.name') }})</p>
 <p>To: repaircentertgi@gmail.com</p>
 
-Hey {{$name}}, 
-HI 
-Pol
+Hey {{$name}},
+HI
+Pol --}}
+
+yo {{$name}},
+Hi motherfucker
+
+

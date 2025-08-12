@@ -5,12 +5,11 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EmailCenter extends Mailable
+class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,10 +18,11 @@ class EmailCenter extends Mailable
      *
      * @return void
      */
-    public function __construct(private string $name, private array $attachments =[])
+
+    // Add a private property for the name
+    public function __construct(private string $name)
     {
         $this->name = $name;
-        $this->attachments = $attachments;
     }
 
     /**
@@ -33,7 +33,7 @@ class EmailCenter extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Email Center',
+            subject: 'Test Mail',
         );
     }
 
@@ -46,10 +46,10 @@ class EmailCenter extends Mailable
     {
         return new Content(
             view: 'email',
-            with: [
+            //add this with
+              with: [
                 'name' => $this->name,
             ],
-
         );
     }
 
@@ -60,22 +60,10 @@ class EmailCenter extends Mailable
      */
     public function attachments()
     {
-        // return [];
-        return collect($this->attachments)->map(function($filePath){
-            return Attachment::fromPath($filePath);
-        })->toArray();
+        return [];
     }
     // public function build()
     // {
-    //     $email = $this->view('email')
-    //         ->with(['name' => $this->name]);
-
-    //     foreach ($this->attachments as $attachment) {
-    //         $email->attach($attachment);
-    //     }
-
-    //     return $email;
+    //     return $this->view('email');
     // }
-
-
 }
