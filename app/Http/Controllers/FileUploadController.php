@@ -42,7 +42,7 @@ class FileUploadController extends Controller
                     File::create([
                         'fileName' => $fileName,
                         'fileOGName' => $fileOGName,
-                       
+
                     ]);
                 }
             }
@@ -100,7 +100,7 @@ class FileUploadController extends Controller
     //         return redirect()->back()->with('error', 'No files found.');
     //     }
         // return view('/fileupload',compact('file'));
-        
+
         return redirect('/uploadfile')->with('success', 'File/s Uploaded Successfully');
     }
     // public static function savefile(Request $req){
@@ -111,4 +111,9 @@ class FileUploadController extends Controller
     //     return view('/fileupload',compact('file'));
     //     // return redirect('/uploadfile')->with('success', 'File/s Uploaded Successfully');
     // }
+    public function getPicturePathfromNotiRepairId($notirepairId){
+        $picPathList = FileUploadRepository::getPicturebyNotiRepairId($notirepairId);
+        return view('imglink.emaillink',compact('picPathList'));
+
+    }
 }

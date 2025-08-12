@@ -77,91 +77,129 @@ public function handleForm(Request $request)
         $equipmenttype = EquipmentTypeRepository::getallEquipmentType();
         return view('repair',compact('branch', 'manegers','equipmenttype'));
     }
-    public static function saveNotiRepair(Request $req){
+//     public static function saveNotiRepair(Request $req){
+//         $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail);
+//         $uploadedFiles = []; // เก็บ path ของไฟล์ที่จะส่งทางเมล
+
+//        $mimeType = [];
+//         foreach ($req->file('filepic') as $file) {
+//         $file->getClientOriginalName();
+//         $filename = explode('.', $file->getClientOriginalName());
+//         $fileName = $filename[0]."upload".date("Y-m-d").".".$file->getClientOriginalExtension();
+//         $path = Storage::putFileAs('public/', $file, $fileName);
+
+//         $fileup = new FileUpload();
+//         $fileup->filename = $fileName;
+//         $fileup->filepath = $path;
+//         $fileup->NotirepairId = $noti->NotirepairId;
+//         $fileup->save();
+//         $realPath = Storage::path($path);
+//         $imageData = Storage::get($path);
+
+//         $uploadedFiles[] = [
+//             'data' => base64_encode($imageData),
+//             'mime' => str_replace('image/', '', mime_content_type($realPath))
+//         ];
+// }
+//         // $file = $req->file('filepic');
+//         // $file->getClientOriginalName();
+//         // $filename = explode('.', $file->getClientOriginalName());
+//         // $fileName = $filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
+//         // // $fileName = $req->filepic."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
+//         // $path = Storage::putFileAs('public/',$file,$fileName);
+
+//         // $fileup = new FileUpload();
+//         // $fileup->filename = $fileName;
+//         // $fileup->filepath = $path;
+//         // $fileup->NotirepairId = $noti->NotirepairId;
+//         // $fileup->save();
+//     //     Mail::raw("รายละเอียดการแจ้งซ่อม: ".$req->detail, function($message) use ($uploadedFiles) {
+//     //     $message->to('smartmeow11@gmail.com')
+//     //             ->subject('แจ้งซ่อมใหม่เข้ามา');
+
+//     //     foreach ($uploadedFiles as $filePath) {
+//     //         $message->attach($filePath);
+//     //     }
+//     // });
+//     // dd($uploadedFiles);
+//        $data = [
+//         'title'=>'Noti with pic email',
+//         'img' => $uploadedFiles,
+//         'mime'=>$mimeType
+//         ];
+//         // เพิ่มบรรทัดนี้เพื่อตรวจสอบข้อมูลก่อนส่งอีเมล
+// // dd($data['img']);
+//          Mail::to("tgirepaircenter@gmail.com")->send(new NotiMail($data));
+//          dd("Email sent successfully!");
+// //  dd($data);
+//     //     return redirect('/repair');
+//         // return redirect('/email');
+
+//         // dd($filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension());
+
+//     }
+public static function saveNotiRepair(Request $req){
         $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail);
-        $uploadedFiles = []; // เก็บ path ของไฟล์ที่จะส่งทางเมล
+        // $uploadedFiles = []; // เก็บ path ของไฟล์ที่จะส่งทางเมล
 
-       $mimeType = [];
+        // $mimeType = [];
         foreach ($req->file('filepic') as $file) {
-    $file->getClientOriginalName();
-    $filename = explode('.', $file->getClientOriginalName());
-    $fileName = $filename[0]."upload".date("Y-m-d").".".$file->getClientOriginalExtension();
-    $path = Storage::putFileAs('public/', $file, $fileName);
-
-    $fileup = new FileUpload();
-    $fileup->filename = $fileName;
-    $fileup->filepath = $path;
-    $fileup->NotirepairId = $noti->NotirepairId;
-    $fileup->save();
-    $realPath = Storage::path($path);
-    $imageData = Storage::get($path);
-
-    $uploadedFiles[] = [
-        'data' => base64_encode($imageData),
-        'mime' => str_replace('image/', '', mime_content_type($realPath))
-    ];
-}
-        // $file = $req->file('filepic');
-        // $file->getClientOriginalName();
-        // $filename = explode('.', $file->getClientOriginalName());
-        // $fileName = $filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
-        // // $fileName = $req->filepic."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
-        // $path = Storage::putFileAs('public/',$file,$fileName);
-
-        // $fileup = new FileUpload();
-        // $fileup->filename = $fileName;
-        // $fileup->filepath = $path;
-        // $fileup->NotirepairId = $noti->NotirepairId;
-        // $fileup->save();
-    //     Mail::raw("รายละเอียดการแจ้งซ่อม: ".$req->detail, function($message) use ($uploadedFiles) {
-    //     $message->to('smartmeow11@gmail.com')
-    //             ->subject('แจ้งซ่อมใหม่เข้ามา');
-
-    //     foreach ($uploadedFiles as $filePath) {
-    //         $message->attach($filePath);
-    //     }
-    // });
-    // dd($uploadedFiles);
-       $data = [
-        'title'=>'Noti with pic email',
-        'img' => $uploadedFiles,
-        'mime'=>$mimeType
-        ];
-        // เพิ่มบรรทัดนี้เพื่อตรวจสอบข้อมูลก่อนส่งอีเมล
-// dd($data['img']);
-         Mail::to("tgirepaircenter@gmail.com")->send(new NotiMail($data));
-         dd("Email sent successfully!");
-//  dd($data);
-    //     return redirect('/repair');
-        // return redirect('/email');
-
-        // dd($filename[0]."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension());
-
-    }
-    public static function SaveNotisendtoemail(Request $req){
-        $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail);
-        $attachments = []; // เก็บ path ของไฟล์ที่จะส่งทางเมล
-        foreach ($req->file('filepic') as $file) {
-            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $fileName = $filename . "_upload_" . date("Y-m-d") . "." . $file->getClientOriginalExtension();
+            $file->getClientOriginalName();
+            $filename = explode('.', $file->getClientOriginalName());
+            $fileName = $filename[0]."upload".date("Y-m-d").".".$file->getClientOriginalExtension();
             $path = Storage::putFileAs('public/', $file, $fileName);
 
-            // บันทึกลง DB
             $fileup = new FileUpload();
             $fileup->filename = $fileName;
             $fileup->filepath = $path;
             $fileup->NotirepairId = $noti->NotirepairId;
             $fileup->save();
+            $realPath = Storage::path($path);
+            $imageData = Storage::get($path);
 
-            // เก็บ path สำหรับแนบเมล
-            $attachments[] = storage_path('app/' . $path);
-
-            // Mail::to('repaircentertgi@gmail.com')->send(new EmailCenter($attachments));
-            // Mail::to('someone@example.com')->send(new EmailCenter($noti, $attachments));
-            // return redirect('/email');
-            Mail::send(new EmailCenter('Pol', $attachments));
-            return redirect('/email');
+            // $uploadedFiles[] = [
+            //     'data' => base64_encode($imageData),
+            //     'mime' => str_replace('image/', '', mime_content_type($realPath))
+            // ];
         }
+   $data = [
+            'title'=>'Noti with pic email',
+            // 'img' => $uploadedFiles,
+            // 'mime'=>$mimeType,
+            'linkmail'=>url("picshow/".$noti->NotirepairId)
+        ];
 
+        // Mail::to("smartmeow11@gmail.com")->send(new NotiMail($data));
+        Mail::to($req->email1)->send(new NotiMail($data));
+        Mail::to($req->email2)->send(new NotiMail($data));
+        Mail::to($req->email3)->send(new NotiMail($data));
+        dd("Email sent successfully!");
     }
+
+    // public static function SaveNotisendtoemail(Request $req){
+    //     $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail);
+    //     $attachments = []; // เก็บ path ของไฟล์ที่จะส่งทางเมล
+    //     foreach ($req->file('filepic') as $file) {
+    //         $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+    //         $fileName = $filename . "_upload_" . date("Y-m-d") . "." . $file->getClientOriginalExtension();
+    //         $path = Storage::putFileAs('public/', $file, $fileName);
+
+    //         // บันทึกลง DB
+    //         $fileup = new FileUpload();
+    //         $fileup->filename = $fileName;
+    //         $fileup->filepath = $path;
+    //         $fileup->NotirepairId = $noti->NotirepairId;
+    //         $fileup->save();
+
+    //         // เก็บ path สำหรับแนบเมล
+    //         $attachments[] = storage_path('app/' . $path);
+
+    //         // Mail::to('repaircentertgi@gmail.com')->send(new EmailCenter($attachments));
+    //         // Mail::to('someone@example.com')->send(new EmailCenter($noti, $attachments));
+    //         // return redirect('/email');
+    //         Mail::send(new EmailCenter('Pol', $attachments));
+    //         return redirect('/email');
+    //     }
+
+    // }
 }

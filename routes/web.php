@@ -108,3 +108,4 @@ Route::get('/testmail', [EmailController::class, 'sendEmailTother']);
 Route::get('/emailpic', [EmailController::class, 'saveNotiRepair']);
 
 Route::get('/sendmail', [EmailController::class, 'index']);
+Route::get('/picshow/{notirepairId}',[FileUploadController::class,'getPicturePathfromNotiRepairId']);

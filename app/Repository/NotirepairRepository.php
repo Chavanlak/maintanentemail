@@ -21,8 +21,8 @@ class NotirepairRepository{
         $noti->save();
         return $noti;
     }
-    public static function getNotiRepairById($NotirepairId){
-        return Notirepair::find($id);
-    }
+  public static function getNotiRepair(){
+
+  }
 }
 ?>

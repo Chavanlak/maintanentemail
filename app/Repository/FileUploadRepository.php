@@ -3,7 +3,7 @@ namespace App\Repository;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-
+use App\Models\FileUpload;
 class FileUploadRepository{
    public static function gaetallFile(){
     return File::all();
@@ -20,13 +20,13 @@ class FileUploadRepository{
 //     // $FileUploadId->save();
 //    }
 
+
 public static function getPicturebyNotiRepairId($NotirepairId){
-    // $noti = Notirepair::find($NotirepairId);
-    // if ($noti && $noti->picture) {
-    //     return Storage::get($noti->picture);
-    // }
-    // return null;
-}
+        $picList = FileUpload::select(['FileUpload.filepath'])->where('FileUpload.NotirepairId','=',$NotirepairId)->get();
+        return $picList;
+    }
+
+
 }
 
 
