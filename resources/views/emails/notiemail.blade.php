@@ -20,9 +20,9 @@ Thank you for your purchase!
 Noti repair link
 
 @component('mail::button', ['url' => $NotiData['linkmail']])
-Look at this link
+ไฟล์การเเจ้งซ่อม
 @endcomponent
 
-Thank you for your purchase!
+{{-- Thank you for your purchase! --}}
 
 @endcomponent

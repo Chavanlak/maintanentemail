@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\FileUpload;
 use App\Mail\MultipleGmailSender;
 use Illuminate\Http\Request;
 // use Mail;
 Use App\Mail\MarkMail;
 use Illuminate\Support\Facades\Mail;
 use App\Repository\NotirepairRepository;
+use Illuminate\Support\Facades\Storage;
 class EmailController extends Controller
 {
     public function sendMultipleGmails()

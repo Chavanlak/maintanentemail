@@ -149,6 +149,9 @@ public static function saveNotiRepair(Request $req){
             $fileName = $filename[0]."upload".date("Y-m-d").".".$file->getClientOriginalExtension();
             $path = Storage::putFileAs('public/', $file, $fileName);
 
+
+            
+
             $fileup = new FileUpload();
             $fileup->filename = $fileName;
             $fileup->filepath = $path;
@@ -163,7 +166,7 @@ public static function saveNotiRepair(Request $req){
             // ];
         }
    $data = [
-            'title'=>'Noti with pic email',
+            'title'=>'เเจ้งซ่อมอุปกรณ์',
             // 'img' => $uploadedFiles,
             // 'mime'=>$mimeType,
             'linkmail'=>url("picshow/".$noti->NotirepairId)
@@ -171,8 +174,8 @@ public static function saveNotiRepair(Request $req){
 
         // Mail::to("smartmeow11@gmail.com")->send(new NotiMail($data));
         Mail::to($req->email1)->send(new NotiMail($data));
-        Mail::to($req->email2)->send(new NotiMail($data));
-        Mail::to($req->email3)->send(new NotiMail($data));
+        // Mail::to($req->email2)->send(new NotiMail($data));
+        // Mail::to($req->email3)->send(new NotiMail($data));
         dd("Email sent successfully!");
     }
 

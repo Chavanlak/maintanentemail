@@ -75,9 +75,9 @@
                         <textarea name="detail" id=""></textarea>
                     </div>
                     <input type="text" name="email1" id="branch" class="form-control mb-3" placeholder="เมลสาขา" required>
-                    <input type="text" name="email2" id="branch" class="form-control mb-3" placeholder="เมลโซน" required>
+                    {{-- <input type="text" name="email2" id="branch" class="form-control mb-3" placeholder="เมลโซน" required>
                     <input type="text" name="email3" id="branch" class="form-control mb-3" placeholder="เมลรับเเจ้งซ่อม" required>
-                    <div class="mb-3">
+                    <div class="mb-3"> --}}
                         <input type="file" name="filepic[]" multiple>
                     </div>
 
