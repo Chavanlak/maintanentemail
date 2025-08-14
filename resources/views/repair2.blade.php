@@ -75,6 +75,7 @@
                         </label>
                         <textarea name="detail" id=""></textarea>
                     </div>
+<<<<<<< HEAD
                     <div class="mb-3">
                         <label for="mail" class="form-label fw-bold">
                             <i class="mdi mdi-wrench-outline"></i> เลือกอีเมลสาขา
@@ -94,12 +95,34 @@
                         <select name="email2" id="" class="form-select" required>
                             <option value="">-- เลือกอีเมลโซน--</option>
 
+=======
+                    {{-- <div class="mb-3">
+                        <label for="mail" class="form-label fw-bold">
+                            <i class="mdi mdi-wrench-outline"></i> เลือกอีเมลสาขา
+                        </label>
+                        <select name="mail" id="mail" class="form-select" required>
+                            <option value="">-- เลือกอีเมลสาขา--</option>
+                            @foreach ($branchmail as $mail1)
+                                <option value="{{ $mail1->email}}">{{ $mail1->email }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+              
+                    <div class="mb-3">
+                        <label for="zoneMail" class="form-label fw-bold">
+                            <i class="mdi mdi-wrench-outline"></i> เลือกอีเมลโซน
+                        </label>
+                        <select name="zoneMail" id="" class="form-select" required>
+                            <option value="">-- เลือกอีเมลโซน--</option>
+                            
+>>>>>>> fc77caaccfd55f4c6f22c2a081658aa7f0f0999c
                             @foreach ($zoneEmail as $mail2)
                                 <option value="{{ $mail2->email}}">{{ $mail2->email }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
+<<<<<<< HEAD
                         {{-- <label for="category" class="form-label fw-bold">
                                 <i class="mdi mdi-wrench-outline"></i> อีเมลที่ต้องการเเจ้งซ่อม
                             </label>
@@ -112,6 +135,12 @@
                             <option value="pm2storetana@gmail.com">pm2storetana@gmail.com เมลสโต</option>
                             <option value="smartmeow11@gmail.com">smartmeow11@gmail.com dummy</option>
                         </select>
+=======
+                        <label for="category" class="form-label fw-bold">
+                            <i class="mdi mdi-wrench-outline"></i> อีเมลที่ต้องการเเจ้งซ่อม
+                        </label>
+                         <input type="text" name="mail" id="branch" class="form-control mb-3" placeholder="เมลเเจ้งซ่อม" required>
+>>>>>>> fc77caaccfd55f4c6f22c2a081658aa7f0f0999c
                     </div>
                     {{-- <input type="text" name="email1" id="branch" class="form-control mb-3" placeholder="เมลสาขา" required> --}}
                     {{-- <input type="text" name="email2" id="branch" class="form-control mb-3" placeholder="เมลโซน" required>

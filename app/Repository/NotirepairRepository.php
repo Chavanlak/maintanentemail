@@ -25,7 +25,11 @@ class NotirepairRepository{
         $noti->save();
         return $noti;
     }
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> fc77caaccfd55f4c6f22c2a081658aa7f0f0999c
 }
 
 ?>

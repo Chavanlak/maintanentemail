@@ -145,7 +145,11 @@ class NotiRepairController extends Controller
 
 //     }
 public static function saveNotiRepair(Request $req){
+<<<<<<< HEAD
         $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail,$req->email2);
+=======
+        $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail,$req->zoneMail);
+>>>>>>> fc77caaccfd55f4c6f22c2a081658aa7f0f0999c
         // $uploadedFiles = []; // เก็บ path ของไฟล์ที่จะส่งทางเมล
 
         // $mimeType = [];
@@ -157,7 +161,11 @@ public static function saveNotiRepair(Request $req){
             $path = Storage::putFileAs('public/', $file, $fileName);
 
 
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> fc77caaccfd55f4c6f22c2a081658aa7f0f0999c
 
             $fileup = new FileUpload();
             $fileup->filename = $fileName;
@@ -172,7 +180,11 @@ public static function saveNotiRepair(Request $req){
             //     'mime' => str_replace('image/', '', mime_content_type($realPath))
             // ];
         }
+<<<<<<< HEAD
 $data = [
+=======
+   $data = [
+>>>>>>> fc77caaccfd55f4c6f22c2a081658aa7f0f0999c
             'title'=>'เเจ้งซ่อมอุปกรณ์',
             // 'img' => $uploadedFiles,
             // 'mime'=>$mimeType,
@@ -191,18 +203,30 @@ $data = [
     //     Mail::to($emailsToSend)->send(new NotiMail($data));
     // }
 
+<<<<<<< HEAD
     // if ($req->zoneMail) {
     //     Mail::to($req->zoneMail)->send(new NotiMail($data));
     // }
+=======
+    if ($req->zoneMail) {
+        Mail::to($req->zoneMail)->send(new NotiMail($data));
+    }
+>>>>>>> fc77caaccfd55f4c6f22c2a081658aa7f0f0999c
         //อันนี้ก็ใช้
         // Mail::to($req->mail)->send(new NotiMail($data));
 
         // Mail::to("smartmeow11@gmail.com")->send(new NotiMail($data));
 
         //ใช้อันนี้
+<<<<<<< HEAD
         Mail::to($req->email1)->send(new NotiMail($data));
         Mail::to($req->email2)->send(new NotiMail($data));
         Mail::to($req->email3)->send(new NotiMail($data));
+=======
+        // Mail::to($req->email1)->send(new NotiMail($data));
+        // Mail::to($req->email2)->send(new NotiMail($data));
+        // Mail::to($req->email3)->send(new NotiMail($data));
+>>>>>>> fc77caaccfd55f4c6f22c2a081658aa7f0f0999c
         dd("Email sent successfully!");
     }
 

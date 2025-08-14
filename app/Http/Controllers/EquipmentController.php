@@ -23,10 +23,16 @@ public static function ShowAllEquipment(Request $req)
     $equipment = EquipmentRepository::getequipmentById($req->category);
     $branchmail = MastbranchRepository::getallBranchEmail();
     $zoneEmail = NotirepairRepository::getSelectZoneEmail();
+<<<<<<< HEAD
     $branchname = $req->branch;
     $zonename = $req->zone;
     //ส่งค่าพารามิเตอร์ไปยัง view
     return view('/repair2',compact('equipment','branchmail','zoneEmail','branchname','zonename'));
+=======
+    // $branch = $req->branch; 
+    //ส่งค่าพารามิเตอร์ไปยัง view
+    return view('/repair2',data: compact('equipment','branchmail','zoneEmail'));
+>>>>>>> fc77caaccfd55f4c6f22c2a081658aa7f0f0999c
 }
 }
 ?>
