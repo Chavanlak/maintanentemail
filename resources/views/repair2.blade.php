@@ -52,7 +52,8 @@
                     class="p-3 bg-light rounded shadow-sm " enctype="multipart/form-data">
                     @csrf
 
-
+                    <input type="hidden" name="branchname" value={{$branchname}}>
+                    <input type="hidden" name="zonename" value={{$zonename}}>
                     <div class="mb-3">
                         <label for="category" class="form-label fw-bold">
                             <i class="mdi mdi-wrench-outline"></i> เลือกอุปกรณ์ที่ต้องการเเจ้งซ่อม
@@ -74,10 +75,48 @@
                         </label>
                         <textarea name="detail" id=""></textarea>
                     </div>
-                    <input type="text" name="email1" id="branch" class="form-control mb-3" placeholder="เมลสาขา" required>
-                    <input type="text" name="email2" id="branch" class="form-control mb-3" placeholder="เมลโซน" required>
-                    <input type="text" name="email3" id="branch" class="form-control mb-3" placeholder="เมลรับเเจ้งซ่อม" required>
                     <div class="mb-3">
+                        <label for="mail" class="form-label fw-bold">
+                            <i class="mdi mdi-wrench-outline"></i> เลือกอีเมลสาขา
+                        </label>
+                        <select name="email1" id="mail" class="form-select" required>
+                            <option value="">-- เลือกอีเมลสาขา--</option>
+                            @foreach ($branchmail as $mail1)
+                                <option value="{{ $mail1->email}}">{{ $mail1->email }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="zoneMail" class="form-label fw-bold">
+                            <i class="mdi mdi-wrench-outline"></i> เลือกอีเมลโซน
+                        </label>
+                        <select name="email2" id="" class="form-select" required>
+                            <option value="">-- เลือกอีเมลโซน--</option>
+
+                            @foreach ($zoneEmail as $mail2)
+                                <option value="{{ $mail2->email}}">{{ $mail2->email }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        {{-- <label for="category" class="form-label fw-bold">
+                                <i class="mdi mdi-wrench-outline"></i> อีเมลที่ต้องการเเจ้งซ่อม
+                            </label>
+                            <input type="text" name="email3" id="branch" class="form-control mb-3" placeholder="เมลเเจ้งซ่อม" required>
+                        --}}
+
+                        <select name="email3" id="mail" class="form-select" required>
+                            <option value="">-- เมลเเจ้งซ่อม--</option>
+                            <option value="tanadesign.service@gmail.com">tanadesign.service@gmail.com ตกแต่งงภายใน</option>
+                            <option value="pm2storetana@gmail.com">pm2storetana@gmail.com เมลสโต</option>
+                            <option value="smartmeow11@gmail.com">smartmeow11@gmail.com dummy</option>
+                        </select>
+                    </div>
+                    {{-- <input type="text" name="email1" id="branch" class="form-control mb-3" placeholder="เมลสาขา" required> --}}
+                    {{-- <input type="text" name="email2" id="branch" class="form-control mb-3" placeholder="เมลโซน" required>
+                    <input type="text" name="email3" id="branch" class="form-control mb-3" placeholder="เมลรับเเจ้งซ่อม" required>
+                    <div class="mb-3"> --}}
                         <input type="file" name="filepic[]" multiple>
                     </div>
 

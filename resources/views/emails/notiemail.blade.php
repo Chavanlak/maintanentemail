@@ -18,11 +18,23 @@ Thank you for your purchase!
 @component('mail::message')
 {{$NotiData['title']}}
 Noti repair link
-
-@component('mail::button', ['url' => $NotiData['linkmail']])
-Look at this link
+@component('mail::panel')
+    แจ้งซ่อมจากสาขา {{$NotiData['branchname']}}
 @endcomponent
 
-Thank you for your purchase!
+
+@component('mail::panel')
+    ที่สังกัดกับโซน {{$NotiData['zonename']}}
+@endcomponent
+
+@component('mail::panel')
+    ซ่อมอุปกรณ์ {{$NotiData['equipmentname']}}
+@endcomponent
+
+@component('mail::button', ['url' => $NotiData['linkmail']])
+ไฟล์การเเจ้งซ่อม
+@endcomponent
+
+{{-- Thank you for your purchase! --}}
 
 @endcomponent

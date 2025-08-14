@@ -61,8 +61,14 @@ Route::get('/repair', [NotiRepairController::class,'ShowRepairForm'])->middlewar
 // Route::post('/repair', [NotiRepairController::class, 'handleForm'])->middleware('customauth');
 // Route::get('/repair/equipment', [EquipmentController::class, 'ShowAllEquipmentType'])->middleware('customauth');
 Route::get('/repair/repair2', [EquipmentController::class, 'ShowAllEquipment'])->middleware('customauth');
+// Route::get('repair/mail', [MastbranchinfoController::class, 'getemail'])->middleware('customauth');
 Route::post('/repair/submit', [NotiRepairController::class, 'saveNotiRepair'])->middleware('customauth');
 // Route::post('/submit-repair', [NotiRepairController::class, 'submitRepair'])->middleware('customauth'); // ถ้าคุณมีฟอร์มส่งแจ้งซ่อม
+
+
+// Route::get('/repair/repair2', [MastbranchinfoController::class,'showRepair2Form'])->middleware('customauth');
+// ถ้าต้องการ filter email
+Route::get('/repair/mail', [NotiRepairController::class, 'getemail'])->middleware('customauth');
 
 
 // Route::post('/repair', [NotiRepairController::class, 'handleForm']);
@@ -109,3 +115,7 @@ Route::get('/emailpic', [EmailController::class, 'saveNotiRepair']);
 
 Route::get('/sendmail', [EmailController::class, 'index']);
 Route::get('/picshow/{notirepairId}',[FileUploadController::class,'getPicturePathfromNotiRepairId']);
+
+
+//check email
+// Route::get('/show', [MastbranchinfoController::class, 'showallBranch']);

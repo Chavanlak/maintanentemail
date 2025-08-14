@@ -145,6 +145,6 @@ HI
 Pol --}}
 
 yo {{$name}},
-Hi motherfucker
+Hi 
 
 

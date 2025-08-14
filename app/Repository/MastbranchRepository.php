@@ -18,7 +18,20 @@ class MastbranchRepository{
         })->get();
         return $branches;
     }
-
+    // public static function getallBranchEmail(){
+    //     return Mastbranchinfo::whereNotNull('email')
+    //     ->select('email')->get();
+    // }
+    public static function getallBranchEmail(){
+        return Mastbranchinfo::whereNotNull('email')
+        ->get();
+    }
+    public static function getEmailByCode($branchCode)
+    {
+        return Mastbranchinfo::where('MBranchInfo_Code', $branchCode)
+            ->value('email'); // ดึง email ของ branch
+    }
+    
     }
 
 ?>

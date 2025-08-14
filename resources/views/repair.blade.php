@@ -57,7 +57,7 @@
                 <select name="branch" id="branch" class="form-select" required>
                     <option value="">-- เลือกสาขา --</option>
                     @foreach ($branch as $bb)
-                        <option value="{{ $bb->MBranchInfo_Code }}"
+                        <option value="{{ $bb->Location }}"
                             @if (session('MBranchInfo_Code') == $bb->MBranchInfo_Code) selected @endif>
                             {{ $bb->Location }}
                         </option>
@@ -73,7 +73,7 @@
                 <select name="zone" id="zone" class="form-select" required>
                     <option value="">-- เลือก Zone --</option>
                     @foreach ($manegers as $mn)
-                        <option value="{{ $mn->Firstname }}">{{ $mn->Firstname }}</option>
+                        <option value="{{ $mn->StaffName }}">{{ $mn->StaffName }}</option>
                     @endforeach
                 </select>
             </div>
