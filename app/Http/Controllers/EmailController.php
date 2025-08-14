@@ -55,7 +55,7 @@ class EmailController extends Controller
 
     public static function saveNotiRepair(Request $req)
     {
-    $noti = NotirepairRepository::saveNotiRepair($req->category, $req->detail);
+    $noti = NotirepairRepository::saveNotiRepair($req->category, $req->detail,$req->zoneMail);
 
     $uploadedFiles = [];
 

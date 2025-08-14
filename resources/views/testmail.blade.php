@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -58,4 +58,31 @@
       </div>
     </body>
 
-</html>
+</html> --}}
+{{-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    @foreach ($branches as $mn)
+      <p>{{$mn->email }}</p>
+   
+  @endforeach
+</body>
+</html> --}}
+<div class="mb-3">
+    <label for="category" class="form-label fw-bold">
+        <i class="mdi mdi-wrench-outline"></i> เลือกอุปกรณ์ที่ต้องการเเจ้งซ่อม
+    </label>
+    <select name="category" id="category" class="form-select" required>
+        <option value="">-- เลือกเมลสาขา--</option>
+        
+        @foreach ($branchmail as $mail)
+            <option value="{{ $mail->email }}">{{ $mail->email }}</option>
+        @endforeach
+    </select>
+</div>

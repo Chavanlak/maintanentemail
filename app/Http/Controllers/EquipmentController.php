@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Repository\EquipmentRepository;
+use App\Repository\MastbranchRepository;
+use App\Repository\NotirepairRepository;
 use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
@@ -19,7 +21,10 @@ public static function ShowAllEquipment(Request $req)
     // dd($req->category); //oject category
     // ตรวจสอบว่ามีการส่งค่า category มาหรือไม่
     $equipment = EquipmentRepository::getequipmentById($req->category);
+    $branchmail = MastbranchRepository::getallBranchEmail();
+    $zoneEmail = NotirepairRepository::getSelectZoneEmail();
+    // $branch = $req->branch; 
     //ส่งค่าพารามิเตอร์ไปยัง view
-    return view('/repair2',compact('equipment'));
+    return view('/repair2',data: compact('equipment','branchmail','zoneEmail'));
 }
 }

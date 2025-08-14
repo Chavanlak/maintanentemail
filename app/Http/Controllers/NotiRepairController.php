@@ -35,9 +35,12 @@ class NotiRepairController extends Controller
     }
 
 
-
-public function handleForm(Request $request)
-{
+    public static function showallZoneEmail(){
+        $zoneEmail = NotirepairRepository::getSelectZoneEmail();
+        return view('zoneemail',compact('zoneEmail'));
+    }
+    public function handleForm(Request $request)
+    {
     $request->validate([
         'branch' => 'required|string',
         'zone' => 'required|string',
@@ -52,7 +55,7 @@ public function handleForm(Request $request)
     ]);
 
     return redirect('repair/form'); // หรือแสดงหน้าถัดไป
-}
+    }
 
 // public function showForm()
 // {
@@ -71,10 +74,13 @@ public function handleForm(Request $request)
 
 //     return view('repair', compact('branch', 'manegers'));
 // }
+
     public static function ShowRepairForm(){
         $branch = MastbranchRepository::selectbranch();
         $manegers = NotirepairRepository::getAllNotirepair();
         $equipmenttype = EquipmentTypeRepository::getallEquipmentType();
+        // $branchmail = MastbranchRepository::getallBranchEmail();
+        // return view('repair',compact('branch', 'manegers','equipmenttype', 'branchmail'));
         return view('repair',compact('branch', 'manegers','equipmenttype'));
     }
 //     public static function saveNotiRepair(Request $req){
@@ -139,10 +145,11 @@ public function handleForm(Request $request)
 
 //     }
 public static function saveNotiRepair(Request $req){
-        $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail);
+        $noti = NotirepairRepository::saveNotiRepair($req->category,$req->detail,$req->zoneMail);
         // $uploadedFiles = []; // เก็บ path ของไฟล์ที่จะส่งทางเมล
 
         // $mimeType = [];
+        // $branchEmail = MastbranchRepository::getallBranchEmail();
         foreach ($req->file('filepic') as $file) {
             $file->getClientOriginalName();
             $filename = explode('.', $file->getClientOriginalName());
@@ -171,9 +178,25 @@ public static function saveNotiRepair(Request $req){
             // 'mime'=>$mimeType,
             'linkmail'=>url("picshow/".$noti->NotirepairId)
         ];
+     // 5️⃣ ส่งเมลทั้ง branch และ zone
+    // $emailsToSend = [];
+    // if ($branchEmail) $emailsToSend[] = $branchEmail;
+    // if ($req->zoneMail) $emailsToSend[] = $req->zoneMail;
+
+    // if (!empty($emailsToSend)) {
+    //     Mail::to($emailsToSend)->send(new NotiMail($data));
+    // }
+
+    if ($req->zoneMail) {
+        Mail::to($req->zoneMail)->send(new NotiMail($data));
+    }
+        //อันนี้ก็ใช้
+        // Mail::to($req->mail)->send(new NotiMail($data));
 
         // Mail::to("smartmeow11@gmail.com")->send(new NotiMail($data));
-        Mail::to($req->email1)->send(new NotiMail($data));
+
+        //ใช้อันนี้
+        // Mail::to($req->email1)->send(new NotiMail($data));
         // Mail::to($req->email2)->send(new NotiMail($data));
         // Mail::to($req->email3)->send(new NotiMail($data));
         dd("Email sent successfully!");

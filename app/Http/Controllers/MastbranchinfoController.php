@@ -17,7 +17,7 @@ class MastbranchinfoController extends Controller
     public static function showallBranch()
     {
         $branches = MastbranchRepository::getallBranch();
-        return view('testbranch', ['branches' => $branches]);
+        return view('testmail', ['branches' => $branches]);
     }
     // public static function pullBranch(){
     //     return view('repair');
@@ -73,6 +73,21 @@ class MastbranchinfoController extends Controller
 
     return redirect()->back()->with('success', 'ยืนยันสาขาแล้ว: ' . $branch->Location);
 }
+// public static function showRepair2Form()
+// {
+//     // ดึง email ทั้งหมดจาก database
+//     $branchmail = MastbranchRepository::getallBranchEmail();
+
+//     // ส่งไปที่ view repair2
+//     return view('repair2', compact('branchmail'));
+// }
+
+    public static function getemail(Request $req){
+        $branchmail = MastbranchRepository::getallBranchEmail();
+        return view('repair2',compact('branchmail'));
+        // dd($branchmail);
+        // return redirect("/repair2")->with('branchmail', $branchmail);
+    }
 
 
     //     public function storeBranch(Request $request)

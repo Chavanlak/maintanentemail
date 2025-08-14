@@ -74,7 +74,37 @@
                         </label>
                         <textarea name="detail" id=""></textarea>
                     </div>
-                    <input type="text" name="email1" id="branch" class="form-control mb-3" placeholder="เมลสาขา" required>
+                    {{-- <div class="mb-3">
+                        <label for="mail" class="form-label fw-bold">
+                            <i class="mdi mdi-wrench-outline"></i> เลือกอีเมลสาขา
+                        </label>
+                        <select name="mail" id="mail" class="form-select" required>
+                            <option value="">-- เลือกอีเมลสาขา--</option>
+                            @foreach ($branchmail as $mail1)
+                                <option value="{{ $mail1->email}}">{{ $mail1->email }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+              
+                    <div class="mb-3">
+                        <label for="zoneMail" class="form-label fw-bold">
+                            <i class="mdi mdi-wrench-outline"></i> เลือกอีเมลโซน
+                        </label>
+                        <select name="zoneMail" id="" class="form-select" required>
+                            <option value="">-- เลือกอีเมลโซน--</option>
+                            
+                            @foreach ($zoneEmail as $mail2)
+                                <option value="{{ $mail2->email}}">{{ $mail2->email }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label fw-bold">
+                            <i class="mdi mdi-wrench-outline"></i> อีเมลที่ต้องการเเจ้งซ่อม
+                        </label>
+                         <input type="text" name="mail" id="branch" class="form-control mb-3" placeholder="เมลเเจ้งซ่อม" required>
+                    </div>
+                    {{-- <input type="text" name="email1" id="branch" class="form-control mb-3" placeholder="เมลสาขา" required> --}}
                     {{-- <input type="text" name="email2" id="branch" class="form-control mb-3" placeholder="เมลโซน" required>
                     <input type="text" name="email3" id="branch" class="form-control mb-3" placeholder="เมลรับเเจ้งซ่อม" required>
                     <div class="mb-3"> --}}

@@ -73,7 +73,7 @@
                 <select name="zone" id="zone" class="form-select" required>
                     <option value="">-- เลือก Zone --</option>
                     @foreach ($manegers as $mn)
-                        <option value="{{ $mn->Firstname }}">{{ $mn->Firstname }}</option>
+                        <option value="{{ $mn->StaffName }}">{{ $mn->StaffName }}</option>
                     @endforeach
                 </select>
             </div>
